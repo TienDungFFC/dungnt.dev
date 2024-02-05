@@ -15,6 +15,8 @@ const config: Config = {
       lightPrimary: "#FFFFFF",
       textMain: "#94A3B8",
       lightText: "0F172A",
+      transparent: "transparent",
+      lightgreen: '#3AB351'
     },
     extend: {
       backgroundImage: {
