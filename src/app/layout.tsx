@@ -22,7 +22,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <Providers>
           <Header />
-          <main className="py-[60px] w-full min-h-screen bg-lightPrimary dark:bg-primary">
+          <main className="py-10 md:py-[60px] w-full min-h-screen bg-lightPrimary dark:bg-primary">
             {children}
           </main>
           <Footer />
