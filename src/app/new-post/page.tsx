@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 import { CiCirclePlus } from "react-icons/ci";
 import { GoLinkExternal } from "react-icons/go";
 import { FaImage } from "react-icons/fa";
@@ -9,15 +9,29 @@ import ReactQuill from 'react-quill';
 import "react-quill/dist/quill.bubble.css";
 import { fetcher } from '@/utils/fetcher';
 import dynamic from "next/dynamic";
+import { TagsInput } from "react-tag-input-component";
+import CustomSelect from '@/components/select';
 
+const options = [
+    { value: 'option1', label: 'Option 1' },
+    { value: 'option2', label: 'Option 2' },
+    { value: 'option3', label: 'Option 3' },
+];
+
+  
 const NewPost = () => {
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState<ReactQuill.Value>();
     const [title, setTitle] = useState('');
-    const [thumb, setThumb] = useState<File>();
+    const [thumb, setThumb] = useState<File>(); 
+    const [category, setCategory] = useState();
+    const [listCategory, setListCategory] = useState([]);
+    const [selected, setSelected] = useState(["papaya"]);
+
     const ReactQuill = useMemo(() => dynamic(() => import('react-quill'), { ssr: false }),[]);
     const handleSubmit = async () => {
-        console.log("handle")
+        console.log("handle: ", thumb)
+        
         const res = await fetcher('api/posts', {
             method: "POST",
             headers: {
@@ -40,8 +54,28 @@ const NewPost = () => {
         }
     }
 
+    const handleSelectChange = (value: any) => {
+        console.log('Selected:', value);
+    };
+    
+    const fetchData = () => {
+        fetcher('/api/categories')
+        .then((list) => {
+            console.log("list categories:", list);
+            setListCategory([])
+        })
+        .catch((error) => {
+            console.error("Can't fetch categories", error)
+        })
+    }
+
+    useEffect(() => {
+        fetchData()
+    }, [])
+
     return (
         <div className='container mx-auto relative flex-col justify-start'>
+            <CustomSelect options={options} onChange={handleSelectChange} />
             <input type="text" placeholder='Title' className='p-12 w-full text-3xl border-none outline-none bg-transparent' onChange={e => setTitle(e.target.value)}/>
             <input type="file" className='file:bg-gradient-to-b file:from-blue-500 file:to-blue-600 file:px-6 file:py-3 file:m-5 file:border-none file:rounded-full file:text-white file:cursor-pointer file:shadow-lg file:shadow-blue-600/50
             bg-gradient-to-br from-gray-600 to-gray-700 text-white/80 rounded-full cursor-pointer shadow-xl shadow-gray-700/60' onChange={handleFile}/>
@@ -63,7 +97,14 @@ const NewPost = () => {
                     </div>
                 )}
                 <ReactQuill theme="bubble" value={value} onChange={setValue} placeholder='Tell your story...' className='w-full'/>
+
             </div>
+            <TagsInput
+                    value={selected}
+                    onChange={setSelected}
+                    name="fruits"
+                    placeHolder="enter fruits"
+                />
             <button className='absolute top-0 right-5 px-5 py-3 border-none text-white bg-lightgreen rounded-full cursor-pointer' onClick={handleSubmit}>Publish</button>
         </div>
     )

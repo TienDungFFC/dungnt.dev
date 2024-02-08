@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server"
 import { fetcher } from "@/utils/fetcher"
 
-const DATA_SOURCE_URL = "http://localhost:80801/api/posts"
+const DATA_SOURCE_URL = process.env.API_BLOG_HOST || "http://localhost:8081"
 
 export interface Post {
     title: string;
@@ -13,7 +13,7 @@ export const POST = async (request: Request) => {
     try {
         const req = await request.json()
 
-        const post = await fetcher<Post>(DATA_SOURCE_URL, {
+        const post = await fetcher(DATA_SOURCE_URL, {
             method: "POST",
             body: JSON.stringify({
                 title: req.title,

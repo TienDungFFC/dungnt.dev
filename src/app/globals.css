@@ -44,3 +44,12 @@ body {
 .quill > .ql-container > .ql-editor.ql-blank::before {
   color: #b3b3b1;
 }
+
+.rti--input {
+  background-color: white;
+  color: black;
+}
+
+.rti--tag {
+  color: black;
+}
