@@ -59,10 +59,20 @@ const NewPost = () => {
     };
     
     const fetchData = () => {
-        fetcher('/api/categories')
+        fetch('http://localhost:8081/api/categories')
         .then((list) => {
-            console.log("list categories:", list);
-            setListCategory([])
+            return list.json();
+        })
+        .then((cates) => {
+            const categories = cates.data
+            const cateResults = []
+            for (const category of categories) {
+                cateResults.push({
+                    value: category.id,
+                    label: category.title
+                })
+            }
+            setListCategory(cateResults)
         })
         .catch((error) => {
             console.error("Can't fetch categories", error)
@@ -75,7 +85,7 @@ const NewPost = () => {
 
     return (
         <div className='container mx-auto relative flex-col justify-start'>
-            <CustomSelect options={options} onChange={handleSelectChange} />
+            <CustomSelect options={listCategory} onChange={handleSelectChange} />
             <input type="text" placeholder='Title' className='p-12 w-full text-3xl border-none outline-none bg-transparent' onChange={e => setTitle(e.target.value)}/>
             <input type="file" className='file:bg-gradient-to-b file:from-blue-500 file:to-blue-600 file:px-6 file:py-3 file:m-5 file:border-none file:rounded-full file:text-white file:cursor-pointer file:shadow-lg file:shadow-blue-600/50
             bg-gradient-to-br from-gray-600 to-gray-700 text-white/80 rounded-full cursor-pointer shadow-xl shadow-gray-700/60' onChange={handleFile}/>
