@@ -26,7 +26,7 @@ const NewPost = () => {
     const [thumb, setThumb] = useState<File>(); 
     const [category, setCategory] = useState();
     const [listCategory, setListCategory] = useState([]);
-    const [selected, setSelected] = useState(["papaya"]);
+    const [tags, setTags] = useState<string[]>([]);
 
     const ReactQuill = useMemo(() => dynamic(() => import('react-quill'), { ssr: false }),[]);
     const handleSubmit = async () => {
@@ -41,6 +41,8 @@ const NewPost = () => {
                 title,
                 thumb,
                 content: value,
+                category,
+                tags,
                 status: 1,
             })
         })
@@ -56,6 +58,7 @@ const NewPost = () => {
 
     const handleSelectChange = (value: any) => {
         console.log('Selected:', value);
+        setCategory(value)
     };
     
     const fetchData = () => {
@@ -110,11 +113,11 @@ const NewPost = () => {
 
             </div>
             <TagsInput
-                    value={selected}
-                    onChange={setSelected}
-                    name="fruits"
-                    placeHolder="enter fruits"
-                />
+                value={tags}
+                onChange={setTags}
+                name="fruits"
+                placeHolder="enter fruits"
+            />
             <button className='absolute top-0 right-5 px-5 py-3 border-none text-white bg-lightgreen rounded-full cursor-pointer' onClick={handleSubmit}>Publish</button>
         </div>
     )
