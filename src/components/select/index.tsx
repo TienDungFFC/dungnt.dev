@@ -20,7 +20,7 @@ const CustomSelect = ({ options, onChange}) => {
           {option.label}
         </option>
       ))}
-    </select>
+    </select>  
   );
 };
 

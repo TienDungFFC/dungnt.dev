@@ -19,6 +19,9 @@ export const POST = async (request: Request) => {
                 title: req.title,
                 content: req.content,
                 status: 1,
+                tags: req.tags,
+                category: req.category,
+                thumb: req.thumb
             })
         })
         console.log("pos", post);

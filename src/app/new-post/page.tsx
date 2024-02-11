@@ -57,7 +57,6 @@ const NewPost = () => {
     }
 
     const handleSelectChange = (value: any) => {
-        console.log('Selected:', value);
         setCategory(value)
     };
     
