@@ -30,7 +30,6 @@ const NewPost = () => {
 
     const ReactQuill = useMemo(() => dynamic(() => import('react-quill'), { ssr: false }),[]);
     const handleSubmit = async () => {
-        console.log("handle: ", thumb)
         
         const res = await fetcher('api/posts', {
             method: "POST",

@@ -24,7 +24,6 @@ export const POST = async (request: Request) => {
                 thumb: req.thumb
             })
         })
-        console.log("pos", post);
         return new NextResponse(JSON.stringify(post), {status: 200}) 
     } catch(err) {
         console.log("error: ", err)
