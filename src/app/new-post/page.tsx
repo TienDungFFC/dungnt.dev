@@ -9,14 +9,17 @@ import ReactQuill from 'react-quill';
 import "react-quill/dist/quill.bubble.css";
 import { fetcher } from '@/utils/fetcher';
 import dynamic from "next/dynamic";
-import { TagsInput } from "react-tag-input-component";
+import CreatableSelect from 'react-select/creatable';
 import CustomSelect from '@/components/select';
 
-const options = [
-    { value: 'option1', label: 'Option 1' },
-    { value: 'option2', label: 'Option 2' },
-    { value: 'option3', label: 'Option 3' },
-];
+export interface TagOption {
+    readonly value: string;
+    readonly label: string;
+  }
+  
+  export const tagOptions: readonly TagOption[] = [
+
+  ];
 
   
 const NewPost = () => {
@@ -26,11 +29,10 @@ const NewPost = () => {
     const [thumb, setThumb] = useState<File>(); 
     const [category, setCategory] = useState();
     const [listCategory, setListCategory] = useState([]);
-    const [tags, setTags] = useState<string[]>([]);
+    const [tags, setTags] = useState<TagOption[]>([]);
 
     const ReactQuill = useMemo(() => dynamic(() => import('react-quill'), { ssr: false }),[]);
     const handleSubmit = async () => {
-        
         const res = await fetcher('api/posts', {
             method: "POST",
             headers: {
@@ -40,7 +42,7 @@ const NewPost = () => {
                 title,
                 thumb,
                 content: value,
-                category,
+                categoryId: category,
                 tags,
                 status: 1,
             })
@@ -80,6 +82,10 @@ const NewPost = () => {
         })
     }
 
+    const handleChangeTags = (inputValue: any) => {
+        setTags([...tags, ...inputValue])
+    }
+
     useEffect(() => {
         fetchData()
     }, [])
@@ -110,12 +116,7 @@ const NewPost = () => {
                 <ReactQuill theme="bubble" value={value} onChange={setValue} placeholder='Tell your story...' className='w-full'/>
 
             </div>
-            <TagsInput
-                value={tags}
-                onChange={setTags}
-                name="fruits"
-                placeHolder="enter fruits"
-            />
+            <CreatableSelect onChange={handleChangeTags} isMulti options={tagOptions} />
             <button className='absolute top-0 right-5 px-5 py-3 border-none text-white bg-lightgreen rounded-full cursor-pointer' onClick={handleSubmit}>Publish</button>
         </div>
     )
