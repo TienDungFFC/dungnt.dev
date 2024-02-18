@@ -34,7 +34,7 @@ export const POST = async (request: Request) => {
     }
 }
 
-export const GET = async (request: Request) => {
+export const GET = async () => {
     try {
         const posts = await fetch(`${DATA_SOURCE_URL}`)
         const result = await posts.json();
