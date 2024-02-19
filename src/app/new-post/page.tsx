@@ -17,11 +17,6 @@ export interface TagOption {
     readonly label: string;
   }
   
-  export const tagOptions: readonly TagOption[] = [
-
-  ];
-
-  
 const NewPost = () => {
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState<ReactQuill.Value>();
@@ -116,7 +111,7 @@ const NewPost = () => {
                 <ReactQuill theme="bubble" value={value} onChange={setValue} placeholder='Tell your story...' className='w-full'/>
 
             </div>
-            <CreatableSelect onChange={handleChangeTags} isMulti options={tagOptions} />
+            <CreatableSelect onChange={handleChangeTags} isMulti options={[]} />
             <button className='absolute top-0 right-5 px-5 py-3 border-none text-white bg-lightgreen rounded-full cursor-pointer' onClick={handleSubmit}>Publish</button>
         </div>
     )
