@@ -1,10 +1,33 @@
+'use client'
 import Image from "next/image";
-import Link from "next/link";
 import RobotPost from "~/assets/thumb-post-2.png"
 import { MdDateRange } from "react-icons/md";
 import { MdAccessTime } from "react-icons/md";
+import PostItem from "@/pages/post-item";
+import { useEffect, useState } from "react";
+import { fetcher } from "@/utils/fetcher";
+
+export interface PostItem {
+  title: string
+}
 
 export default function Home() {
+  const [posts, setPosts] = useState([])
+
+  const fetchPost = async () => {
+    const response = await fetcher<PostItem>('/api/posts', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    });
+    console.log("post", response)
+  }
+
+  useEffect(() => {
+    fetchPost()
+  }, [])
+
   return (
     <div className="container mx-auto w-full px-4 md:w-[60%]">
       <div className="text-sm font-medium text-center text-gray-500 dark:text-gray-400 dark:border-gray-700">
@@ -29,149 +52,10 @@ export default function Home() {
         </ul>
       </div>
 
-      <div className="md:mt-[60px] mt-[40px]">
-        <div className="flex-col justify-start gap-6 md:hidden">
-          <div className="w-full md:w-[70%]">
-            <h1 className="text-2xl font-bold dark:text-lightPrimary text-lightMainText">
-              Mastering React Components: Building Reusable and Well-Organized UIs
-            </h1>
-            <div className="time flex justify-start items-start gap-6 my-4">
-              <div className="flex justify-start items-center">
-                <MdDateRange color="#94A3B8"/><span className="ml-1 text-lightSubText dark:text-textMain">29/01/2024</span>
-              </div>
-              <div className="flex justify-start items-center">
-                <MdAccessTime color="#94A3B8" /><span className="ml-1 text-lightSubText dark:text-textMain">5 phút truóc</span>
-              </div>
+      <PostItem />
+      <PostItem />
+      <PostItem />
 
-            </div>
-            <div className="description text-lightSubText dark:text-textMain">
-              A Guide to Efficiently Harnessing the Power of React Components for Clean Code and Seamless Development · Introduction
-            </div>
-          </div>
-          <div className="w-full md:w-[30%] mt-3 md:mt-0">
-            <Image src={RobotPost} className="w-full" alt={`Mastering React Components: Building Reusable and Well-Organized UIs`}/>
-          </div>
-        </div>
-
-        <div className="hidden md:flex justify-start gap-6">
-          <div className="w-full md:w-[70%]">
-            <h1 className="text-2xl font-bold dark:text-lightPrimary text-lightMainText">
-              Mastering React Components: Building Reusable and Well-Organized UIs
-            </h1>
-            <div className="time flex justify-start items-start gap-6 my-4">
-              <div className="flex justify-start items-center">
-                <MdDateRange color="#94A3B8"/><span className="ml-1 text-lightSubText dark:text-textMain">29/01/2024</span>
-              </div>
-              <div className="flex justify-start items-center">
-                <MdAccessTime color="#94A3B8" /><span className="ml-1 text-lightSubText dark:text-textMain">5 phút truóc</span>
-              </div>
-
-            </div>
-            <div className="description text-lightSubText dark:text-textMain">
-              A Guide to Efficiently Harnessing the Power of React Components for Clean Code and Seamless Development · Introduction
-            </div>
-          </div>
-          <div className="w-full md:w-[30%] mt-3 md:mt-0">
-            <Image src={RobotPost} className="w-full" alt={`Mastering React Components: Building Reusable and Well-Organized UIs`}/>
-          </div>
-        </div>
-      </div>
-
-      <div className="md:mt-[60px] mt-[40px]">
-        <div className="flex-col justify-start gap-6 md:hidden">
-          <div className="w-full md:w-[70%]">
-            <h1 className="text-2xl font-bold dark:text-lightPrimary text-lightMainText">
-              Mastering React Components: Building Reusable and Well-Organized UIs
-            </h1>
-            <div className="time flex justify-start items-start gap-6 my-4">
-              <div className="flex justify-start items-center">
-                <MdDateRange color="#94A3B8"/><span className="ml-1 text-lightSubText dark:text-textMain">29/01/2024</span>
-              </div>
-              <div className="flex justify-start items-center">
-                <MdAccessTime color="#94A3B8" /><span className="ml-1 text-lightSubText dark:text-textMain">5 phút truóc</span>
-              </div>
-
-            </div>
-            <div className="description text-lightSubText dark:text-textMain">
-              A Guide to Efficiently Harnessing the Power of React Components for Clean Code and Seamless Development · Introduction
-            </div>
-          </div>
-          <div className="w-full md:w-[30%] mt-3 md:mt-0">
-            <Image src={RobotPost} className="w-full" alt={`Mastering React Components: Building Reusable and Well-Organized UIs`}/>
-          </div>
-        </div>
-
-        <div className="hidden md:flex justify-start gap-6">
-          <div className="w-full md:w-[70%]">
-            <h1 className="text-2xl font-bold dark:text-lightPrimary text-lightMainText">
-              Mastering React Components: Building Reusable and Well-Organized UIs
-            </h1>
-            <div className="time flex justify-start items-start gap-6 my-4">
-              <div className="flex justify-start items-center">
-                <MdDateRange color="#94A3B8"/><span className="ml-1 text-lightSubText dark:text-textMain">29/01/2024</span>
-              </div>
-              <div className="flex justify-start items-center">
-                <MdAccessTime color="#94A3B8" /><span className="ml-1 text-lightSubText dark:text-textMain">5 phút truóc</span>
-              </div>
-
-            </div>
-            <div className="description text-lightSubText dark:text-textMain">
-              A Guide to Efficiently Harnessing the Power of React Components for Clean Code and Seamless Development · Introduction
-            </div>
-          </div>
-          <div className="w-full md:w-[30%] mt-3 md:mt-0">
-            <Image src={RobotPost} className="w-full" alt={`Mastering React Components: Building Reusable and Well-Organized UIs`}/>
-          </div>
-        </div>
-      </div>
-
-      <div className="md:mt-[60px] mt-[40px]">
-        <div className="flex-col justify-start gap-6 md:hidden">
-          <div className="w-full md:w-[70%]">
-            <h1 className="text-2xl font-bold dark:text-lightPrimary text-lightMainText">
-              Mastering React Components: Building Reusable and Well-Organized UIs
-            </h1>
-            <div className="time flex justify-start items-start gap-6 my-4">
-              <div className="flex justify-start items-center">
-                <MdDateRange color="#94A3B8"/><span className="ml-1 text-lightSubText dark:text-textMain">29/01/2024</span>
-              </div>
-              <div className="flex justify-start items-center">
-                <MdAccessTime color="#94A3B8" /><span className="ml-1 text-lightSubText dark:text-textMain">5 phút truóc</span>
-              </div>
-
-            </div>
-            <div className="description text-lightSubText dark:text-textMain">
-              A Guide to Efficiently Harnessing the Power of React Components for Clean Code and Seamless Development · Introduction
-            </div>
-          </div>
-          <div className="w-full md:w-[30%] mt-3 md:mt-0">
-            <Image src={RobotPost} className="w-full" alt={`Mastering React Components: Building Reusable and Well-Organized UIs`}/>
-          </div>
-        </div>
-
-        <div className="hidden md:flex justify-start gap-6">
-          <div className="w-full md:w-[70%]">
-            <h1 className="text-2xl font-bold dark:text-lightPrimary text-lightMainText">
-              Mastering React Components: Building Reusable and Well-Organized UIs
-            </h1>
-            <div className="time flex justify-start items-start gap-6 my-4">
-              <div className="flex justify-start items-center">
-                <MdDateRange color="#94A3B8"/><span className="ml-1 text-lightSubText dark:text-textMain">29/01/2024</span>
-              </div>
-              <div className="flex justify-start items-center">
-                <MdAccessTime color="#94A3B8" /><span className="ml-1 text-lightSubText dark:text-textMain">5 phút truóc</span>
-              </div>
-
-            </div>
-            <div className="description text-lightSubText dark:text-textMain">
-              A Guide to Efficiently Harnessing the Power of React Components for Clean Code and Seamless Development · Introduction
-            </div>
-          </div>
-          <div className="w-full md:w-[30%] mt-3 md:mt-0">
-            <Image src={RobotPost} className="w-full" alt={`Mastering React Components: Building Reusable and Well-Organized UIs`}/>
-          </div>
-        </div>
-      </div>
     </div>
   );
 }
