@@ -1,27 +1,20 @@
 'use client'
-import Image from "next/image";
-import RobotPost from "~/assets/thumb-post-2.png"
-import { MdDateRange } from "react-icons/md";
-import { MdAccessTime } from "react-icons/md";
 import PostItem from "@/pages/post-item";
 import { useEffect, useState } from "react";
 import { fetcher } from "@/utils/fetcher";
-
-export interface PostItem {
-  title: string
-}
+import { PostItemType, Posts } from "@/pages/post-item/types";
 
 export default function Home() {
-  const [posts, setPosts] = useState([])
+  const [posts, setPosts] = useState<PostItemType[]>([])
 
   const fetchPost = async () => {
-    const response = await fetcher<PostItem>('/api/posts', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-    });
-    console.log("post", response)
+    fetcher<Posts>('/api/posts')
+    .then((post) => {
+      setPosts(post.data)
+    })
+    .catch((error) => {
+      console.error("Can't fetch posts", error)
+    })
   }
 
   useEffect(() => {
@@ -51,10 +44,11 @@ export default function Home() {
           </li>
         </ul>
       </div>
-
-      <PostItem />
-      <PostItem />
-      <PostItem />
+      <>
+        {posts.map((post, idx) => (
+          <PostItem key={post.id} post={post}/>
+        ))}
+      </>
 
     </div>
   );
