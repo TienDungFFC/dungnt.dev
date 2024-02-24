@@ -3,7 +3,12 @@ import { useEffect, useState } from "react";
 import { fetcher } from "@/utils/fetcher";
 import { Categories, CategoryItemType } from "./types";
 
-const Categories = () => {
+interface Props {
+    handleActiveCategory?: any
+    cateActive?: string
+}
+
+const Categories = (props: Props) => {
     const [categories, setCategories] = useState<CategoryItemType[]>([])
 
     const fetchCategories = async () => {
@@ -31,23 +36,12 @@ const Categories = () => {
             {categories && categories.length > 0 && categories.map((category) => {
                 return (
                     <li key={category.id} className="me-2">
-                        <a href="#" className="inline-block text-blueSecondary relative p-1 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">{category.title}
+                        <a onClick={() => props.handleActiveCategory(category.title)} href="#" className="inline-block text-blueSecondary relative p-1 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">{category.title}
+                            {props.cateActive == category.title && <span className="after:content-[''] block after:absolute h-[4px] w-full bg-blueMain rounded-full mt-1"></span>}
                         </a>
                     </li>
                 )
             })}
-            {/* <li className="me-2">
-                <a href="#" className="inline-block text-blueSecondary relative p-1 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">CTDL & GT
-                </a>
-            </li>
-            <li className="me-2">
-                <a href="#" className="inline-block text-blueSecondary relative p-1 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">Coding
-                </a>            
-            </li>
-            <li className="me-2">
-                <a href="#" className="inline-block text-blueSecondary relative p-1 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">Database
-                </a>            
-            </li> */}
         </ul> 
         
     )

@@ -7,7 +7,7 @@ import Categories from "@/pages/categories";
 
 export default function Home() {
   const [posts, setPosts] = useState<PostItemType[]>([])
-  const [categories, setCategories] = useState<PostItemType[]>([])
+  const [cateActive, setCateActive] = useState<string>()
   
   // const fetchPosts = async () => {
   //   fetcher<Posts>('/api/posts')
@@ -22,11 +22,14 @@ export default function Home() {
   // useEffect(() => {
   //   fetchPosts()
   // }, [])
+  const handleActiveCategory = (title: string) => {
+    setCateActive(title)
+  }
 
   return (
     <div className="container mx-auto w-full px-4 md:w-[60%]">
       <div className="text-sm font-medium text-center text-gray-500 dark:text-gray-400 dark:border-gray-700">
-        <Categories />
+        <Categories handleActiveCategory={handleActiveCategory} cateActive={cateActive}/>
       </div>
       <>
 
