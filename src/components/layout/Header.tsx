@@ -10,7 +10,7 @@ const Header = () => {
             <div className="container max-w-screen-xl mx-auto md:flex justify-between items-center gap-2 hidden">
                 <div className="flex justify-center items-center">
                     <Image src={Logo} alt="logo" width={60} height={60} className="rounded-full"/>
-                    <strong className="ml-2">TienDung</strong>
+                    <strong className="ml-2">Nygma</strong>
                 </div>
                 <form className="flex-1 hidden md:block">   
                     <div className="relative">
