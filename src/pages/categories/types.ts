@@ -5,4 +5,5 @@ export interface Categories {
 export interface CategoryItemType {
     id: string,
     title: string,
+    slug: string,
 }

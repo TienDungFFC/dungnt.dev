@@ -36,8 +36,8 @@ const Categories = (props: Props) => {
             {categories && categories.length > 0 && categories.map((category) => {
                 return (
                     <li key={category.id} className="me-2">
-                        <a onClick={() => props.handleActiveCategory(category.title)} href="#" className={`inline-block font-bold relative p-1 text-lightMainText ${props.cateActive == category.title ? 'dark:text-lightPrimary' : 'dark:text-blueSecondary'} rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300`}>{category.title}
-                            {props.cateActive == category.title && <span className="after:content-[''] block after:absolute h-[4px] w-full bg-blueMain rounded-full mt-1"></span>}
+                        <a onClick={() => props.handleActiveCategory(category.slug)} href="#" className={`inline-block font-bold relative p-1 text-lightMainText ${props.cateActive == category.slug ? 'dark:text-lightPrimary' : 'dark:text-blueSecondary'} rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300`}>{category.title}
+                            {props.cateActive == category.slug && <span className="after:content-[''] block after:absolute h-[4px] w-full bg-blueMain rounded-full mt-1"></span>}
                         </a>
                     </li>
                 )

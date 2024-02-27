@@ -34,9 +34,13 @@ export const POST = async (request: Request) => {
     }
 }
 
-export const GET = async () => {
+export const GET = async (req: any) => {
     try {
-        const posts = await fetch(`${DATA_SOURCE_URL}`)
+        const url = new URL(req.url)
+        const searchParams = new URLSearchParams(url.searchParams)
+        const category = searchParams.get('category')
+        const urlPost = `${DATA_SOURCE_URL}${category ? `?category=${category}` : ''}`
+        const posts = await fetch(urlPost)
         const result = await posts.json();
         return new NextResponse(JSON.stringify(result), {status: 200}) 
     } catch(err) {

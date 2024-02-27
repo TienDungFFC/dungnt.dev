@@ -1,7 +1,6 @@
 'use client'
 import PostItem from "@/pages/posts/post-item";
 import { useEffect, useState } from "react";
-import { fetcher } from "@/utils/fetcher";
 import { PostItemType, Posts } from "@/pages/posts/types";
 import Categories from "@/pages/categories";
 import Post from "@/pages/posts";
@@ -23,8 +22,8 @@ export default function Home() {
   // useEffect(() => {
   //   fetchPosts()
   // }, [])
-  const handleActiveCategory = (title?: string) => {
-    setCateActive(title)
+  const handleActiveCategory = (slug?: string) => {
+    setCateActive(slug)
   }
 
   return (
