@@ -7,5 +7,6 @@ export interface PostItemType {
     title: string,
     updated_at: string,
     description: string
-    thumb?: string
+    thumb?: string,
+    slug: string
 }
