@@ -1,8 +1,13 @@
 import PublishDate from '@/components/post/publish-date';
 import ReadingMinute from '@/components/post/reading-minute';
 import Link from 'next/link';
+import { useState, useEffect } from 'react';
 
-export default function DetailBlog() {
+export default function DetailBlog({slug}: {slug: string}) {
+    const [post, setPost] = useState();
+    useEffect(() => {
+        
+    }, [slug])
     return (
         <div className='container mx-auto w-full px-4 md:w-[60%]'>
             <h1 className='text-3xl font-bold'>Simplifying State Management with Redux Toolkit: A Comprehensive Guide</h1>
