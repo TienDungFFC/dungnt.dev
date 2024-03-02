@@ -1,10 +1,17 @@
 import PublishDate from '@/components/post/publish-date';
 import ReadingMinute from '@/components/post/reading-minute';
+import Post from '@/pages/posts';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 
 export default function DetailBlog({slug}: {slug: string}) {
     const [post, setPost] = useState();
+    const fetchPost = () => {
+        const res = await fetcher<Post>(`api/posts${slug}`)
+        .then((post) => {
+            setPost(post.data)
+        })
+    }
     useEffect(() => {
         
     }, [slug])
