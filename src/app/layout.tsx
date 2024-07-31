@@ -1,11 +1,17 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Roboto } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
-import Providers from "./providers"
+import Providers from "./providers";
 import Footer from "@/components/layout/Footer";
+import Head from "next/head";
 
-const inter = Inter({ subsets: ["latin"] });
+const roboto = Roboto({
+  weight: ["400", "500", "700", "900"],
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,8 +24,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="vi" className="dark" style={{ colorScheme: "dark" }} suppressContentEditableWarning>
-      <body className={inter.className}>
+    <html
+      lang="vi"
+      className="dark"
+      style={{ colorScheme: "dark" }}
+      suppressContentEditableWarning
+    >
+      <body className={roboto.className}>
         <Providers>
           <Header />
           <main className="py-10 md:py-[60px] w-full min-h-screen bg-lightPrimary dark:bg-primary">
