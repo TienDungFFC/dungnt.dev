@@ -134,7 +134,7 @@ const NewPost = () => {
         />
         <Editor />
       </div>
-      {openCover && <UploadImage />}
+      {openCover && <UploadImage setOpenCover={setOpenCover} />}
     </div>
   );
 };
