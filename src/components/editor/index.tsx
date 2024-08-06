@@ -1,21 +1,23 @@
-'use client';
+"use client";
 import EditorJS from "@editorjs/editorjs";
 import Header from "@editorjs/header";
-import ImageTool from "@editorjs/image";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 export default function Editor() {
+  const isReady = useRef(false);
 
   useEffect(() => {
-    const editor = new EditorJS({
-      holder: "editorjs",
-      tools: {
-        header: Header,
-      },
-      placeholder: 'Type "/" for commands...'
-    });
+    if (!isReady.current) {
+      const editor = new EditorJS({
+        holder: "editorjs",
+        tools: {
+          header: Header,
+        },
+        placeholder: 'Type "/" for commands...',
+      });
+      isReady.current = true;
+    }
   }, []);
-
 
   return <div id="editorjs"></div>;
 }

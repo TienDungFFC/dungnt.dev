@@ -1,6 +1,7 @@
 import Cover from "@/components/icons/cover";
 import { ReactNode, useEffect, useRef, useState } from "react";
 import { Cross1Icon } from "@radix-ui/react-icons";
+import Upload from "./upload";
 
 interface Tab {
   name: string;
@@ -10,11 +11,7 @@ interface Tab {
 const tabs: Tab[] = [
   {
     name: "Upload",
-    component: (
-      <>
-        <h1>Upload</h1>
-      </>
-    ),
+    component: <Upload />,
   },
   {
     name: "Unsplash",
@@ -43,7 +40,7 @@ export default function UploadImage() {
 
   const handleTriggerCover = () => {
     setOpenCover(!openCover);
-  }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -101,15 +98,15 @@ export default function UploadImage() {
               ))}
             </div>
             <div className="absolute h-full right-0 top-0 inline-flex justify-center items-center p-2">
-              <button className=" rounded-2xl py-2 px-4 hover:bg-[#e2e8f0]" onClick={handleTriggerCover}>
+              <button
+                className=" rounded-2xl py-2 px-4 hover:bg-[#e2e8f0]"
+                onClick={handleTriggerCover}
+              >
                 <Cross1Icon />
               </button>
             </div>
-
           </div>
-          <div className="p-4">
-            <div className="border-dotted h-[250px] w-full"></div>
-          </div>
+          <div className="p-4">{tabs[activeTab].component}</div>
         </div>
       )}
     </>
