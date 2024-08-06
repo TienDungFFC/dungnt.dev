@@ -12,6 +12,7 @@ export default function Editor() {
       tools: {
         header: Header,
       },
+      placeholder: 'Type "/" for commands...'
     });
   }, []);
 

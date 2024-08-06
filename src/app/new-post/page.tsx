@@ -99,7 +99,7 @@ const NewPost = () => {
           value={title}
           type="text"
           placeholder="Title"
-          className="p-4 w-full text-3xl border-none outline-none bg-transparent font-bold"
+          className="py-4 w-full text-3xl border-none outline-none bg-transparent font-bold"
           onChange={handleChangeTitle}
         />
         <Editor />
