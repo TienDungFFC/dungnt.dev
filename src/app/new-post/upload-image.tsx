@@ -2,6 +2,7 @@ import Cover from "@/components/icons/cover";
 import { ReactNode, useEffect, useRef, useState } from "react";
 import { Cross1Icon } from "@radix-ui/react-icons";
 import Upload from "./upload";
+import UploadUnsplash from "./upload-unsplash";
 
 interface Tab {
   name: string;
@@ -15,11 +16,7 @@ const tabs: Tab[] = [
   },
   {
     name: "Unsplash",
-    component: (
-      <>
-        <h1>Unsplash</h1>
-      </>
-    ),
+    component: <UploadUnsplash />,
   },
 ];
 
