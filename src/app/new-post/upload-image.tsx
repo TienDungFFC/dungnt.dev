@@ -2,7 +2,7 @@ import Cover from "@/components/icons/cover";
 import { ReactNode, useEffect, useRef, useState } from "react";
 import { Cross1Icon } from "@radix-ui/react-icons";
 import Upload from "./upload";
-import UploadUnsplash from "./upload-unsplash";
+import UploadUnsplash from "@/components/upload-unsplash";
 
 interface Tab {
   name: string;
@@ -103,7 +103,7 @@ export default function UploadImage() {
               </button>
             </div>
           </div>
-          <div className="p-4">{tabs[activeTab].component}</div>
+          <div className="">{tabs[activeTab].component}</div>
         </div>
       )}
     </>

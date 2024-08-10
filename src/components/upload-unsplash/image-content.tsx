@@ -16,12 +16,12 @@ const api = createApi({
   accessKey: "jFGVW3CW4epFDvweFnor9mTKW6xTFRnViW-hedqLtpE",
 });
 
-const UploadUnsplash = () => {
+const UnsplashContent = () => {
   const [data, setPhotosResponse] = useState<any>(null);
 
   useEffect(() => {
     api.search
-      .getPhotos({ query: "cat", orientation: "landscape" })
+      .getPhotos({ query: "blog", orientation: "landscape", perPage: 12 })
       .then((result) => {
         setPhotosResponse(result);
       })
@@ -41,17 +41,24 @@ const UploadUnsplash = () => {
     );
   } else {
     return (
-      <div className="feed">
-        <ul className="columnUl">
-          {data.response.results.map((photo: Photo) => (
-            <li key={photo.id} className="li">
-              <img src={photo.urls.regular} alt="test" />
-            </li>
-          ))}
-        </ul>
+      <div className="grid grid-cols-9 gap-4">
+        {data.response.results.map((photo: Photo) => (
+          <Photo key={photo.id} {...photo} />
+        ))}
       </div>
     );
   }
 };
 
-export default UploadUnsplash;
+const Photo = (photo: Photo) => {
+  return (
+    <div className="h-[125px] w-full relative col-span-3 rounded-lg overflow-hidden">
+      <img
+        src={photo.urls.small}
+        alt="unsplash photo"
+        className="w-full h-full"
+      />
+    </div>
+  );
+};
+export default UnsplashContent;
